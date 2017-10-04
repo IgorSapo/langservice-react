@@ -1,0 +1,24 @@
+.field-title {
+  font-size: 1.28571429em;
+  line-height: 1.28571429em;
+  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  margin-bottom: 15px;
+  font-weight: 500;
+  color: #6e768f;
+  display: block;
+}
+
+.label-circular-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #6e768f;
+  display: inline-block;
+  padding-top: 5px;
+  padding-left: 12px;
+  margin-right: 15px;
+  font-weight: 700;
+}
+
+.label-text {
+}
