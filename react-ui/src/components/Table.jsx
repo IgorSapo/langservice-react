@@ -5,6 +5,25 @@ import './Table.css';
 import { connect } from 'react-redux';
 import { getOrderList } from '../actions/orders';
 
+const TableRow = ({ id, createdAt, urgency, tone }) => (
+  <Table.Row as={NavLink} to={'/orders/' + id} className="table-row">
+    <Table.Cell>{id}</Table.Cell>
+    <Table.Cell>{createdAt}</Table.Cell>
+    <Table.Cell>{urgency}</Table.Cell>
+    <Table.Cell />
+    <Table.Cell>
+      <Header as="h4" image>
+        <Image
+          src="http://placehold.it/150/56a8c2"
+          shape="rounded"
+          size="mini"
+        />
+        <Header.Content>Lena Gorobetz</Header.Content>
+      </Header>
+    </Table.Cell>
+  </Table.Row>
+);
+
 class TableExamplePagination extends React.Component {
   componentDidMount() {
     this.props.getOrderList().then(res => console.log(res));
@@ -12,6 +31,8 @@ class TableExamplePagination extends React.Component {
 
   render() {
     const { isLoading, orders } = this.props.orders;
+    console.log('Orders are: ');
+    console.log(orders);
     if (isLoading) {
       return <div>Loading...</div>;
     }
@@ -21,66 +42,20 @@ class TableExamplePagination extends React.Component {
           <Table.Row>
             <Table.HeaderCell>Order id</Table.HeaderCell>
             <Table.HeaderCell>Date</Table.HeaderCell>
+            <Table.HeaderCell>Urgency</Table.HeaderCell>
             <Table.HeaderCell>Status</Table.HeaderCell>
             <Table.HeaderCell>Translator</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
-          <Table.Row as={NavLink} to="/orders/846" className="table-row">
-            <Table.Cell>846</Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
-            <Table.Cell>Awaiting</Table.Cell>
-            <Table.Cell>
-              <Header as="h4" image>
-                <Image
-                  src="http://placehold.it/150/56a8c2"
-                  shape="rounded"
-                  size="mini"
-                />
-                <Header.Content>Lena Gorobetz</Header.Content>
-              </Header>
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row as={NavLink} to="/orders/849" className="table-row">
-            <Table.Cell>849</Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
-            <Table.Cell>In progress</Table.Cell>
-            <Table.Cell>
-              <Header as="h4" image>
-                <Image
-                  src="http://placehold.it/150/56a8c2"
-                  shape="rounded"
-                  size="mini"
-                />
-                <Header.Content>John Dowe</Header.Content>
-              </Header>
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row
-            as={NavLink}
-            to="/orders/852"
-            positive
-            className="table-row">
-            <Table.Cell>852</Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
-            <Table.Cell>Done</Table.Cell>
-            <Table.Cell>
-              <Header as="h4" image>
-                <Image
-                  src="http://placehold.it/150/56a8c2"
-                  shape="rounded"
-                  size="mini"
-                />
-                <Header.Content>Jack White</Header.Content>
-              </Header>
-            </Table.Cell>
-          </Table.Row>
+          {orders &&
+            orders.map(order => <TableRow key={order.id} {...order} />)}
         </Table.Body>
 
         <Table.Footer>
           <Table.Row>
-            <Table.HeaderCell colSpan="4">
+            <Table.HeaderCell colSpan="5">
               <Menu floated="right" pagination>
                 <Menu.Item as="a" icon>
                   <Icon name="left chevron" />
@@ -108,3 +83,19 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, { getOrderList })(
   TableExamplePagination
 );
+
+// <Table.Row as={NavLink} to="/orders/846" className="table-row">
+//   <Table.Cell>846</Table.Cell>
+//   <Table.Cell>Cell</Table.Cell>
+//   <Table.Cell>Awaiting</Table.Cell>
+//   <Table.Cell>
+//     <Header as="h4" image>
+//       <Image
+//         src="http://placehold.it/150/56a8c2"
+//         shape="rounded"
+//         size="mini"
+//       />
+//       <Header.Content>Lena Gorobetz</Header.Content>
+//     </Header>
+//   </Table.Cell>
+// </Table.Row>
