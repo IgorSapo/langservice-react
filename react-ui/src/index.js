@@ -18,7 +18,7 @@ const reducer = (state = {}, action = {}) => {
 
 const rootReducer = combineReducers({
   reducer,
-  formReducer
+  form: formReducer
 });
 
 const store = createStore(

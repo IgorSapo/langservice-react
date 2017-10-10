@@ -36,11 +36,7 @@ import LanguageDropdown from './LanguageDropdown';
 
 const AgreeCheckbox = props => (
   <Form.Checkbox
-    onChange={(e, b) => {
-      console.log(e);
-      console.log(b);
-      props.input.onChange(b.checked);
-    }}
+    onChange={(e, b) => props.input.onChange(b.checked)}
     label="I agree to the terms and conditions"
   />
 );
@@ -48,11 +44,22 @@ const AgreeCheckbox = props => (
 class FormExampleSubcomponentControl extends Component {
   state = {};
 
+  submit = (a, b, c) => {
+    console.log('a');
+    console.log(a);
+    console.log('b');
+    console.log(b);
+    console.log('c');
+    console.log(c);
+  };
+
   render() {
     // const { value } = this.state;
     const { handleSubmit, invalid, submitting } = this.props;
     return (
-      <Form style={{ backgroundColor: '#FFFFFF', padding: '30px' }}>
+      <Form
+        onSubmit={handleSubmit(this.submit)}
+        style={{ backgroundColor: '#FFFFFF', padding: '30px' }}>
         <Field name="files" component={UploadFile} />
         <Field
           name="targetLanguages"
