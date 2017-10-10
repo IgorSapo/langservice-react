@@ -5,8 +5,6 @@ import NewOrder from './NewOrder';
 import Order from './Order';
 import UploadFile from './UploadFile';
 
-import TestComponent from './TestComponent';
-
 import { Container } from 'semantic-ui-react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import './Container.css';

@@ -17,6 +17,8 @@ import TonePicker from './TonePicker';
 import FieldTitle from './FieldTitle';
 import UploadFile from './UploadFile';
 import LanguageDropdown from './LanguageDropdown';
+import { connect } from 'react-redux';
+import { submit as submitForm } from '../actions/orders';
 
 // const buttonGroup = () => {
 //   <Button.Group fluid toggle>
@@ -44,13 +46,12 @@ const AgreeCheckbox = props => (
 class FormExampleSubcomponentControl extends Component {
   state = {};
 
-  submit = (a, b, c) => {
-    console.log('a');
-    console.log(a);
-    console.log('b');
-    console.log(b);
-    console.log('c');
-    console.log(c);
+  submit = form => {
+    this.props.submitForm(form).then(res => {
+      console.log(res.data);
+      console.log(this.props);
+      this.props.history.push('/');
+    });
   };
 
   render() {
@@ -80,7 +81,9 @@ class FormExampleSubcomponentControl extends Component {
   }
 }
 
-export default reduxForm({ form: 'newOrder' })(FormExampleSubcomponentControl);
+export default connect(null, { submitForm })(
+  reduxForm({ form: 'newOrder' })(FormExampleSubcomponentControl)
+);
 
 // const CardGroupSwitch = (
 //   <Card.Group>

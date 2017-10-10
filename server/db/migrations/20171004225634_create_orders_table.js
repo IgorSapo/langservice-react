@@ -4,6 +4,10 @@ exports.up = function(knex, Promise) {
     // TODO: Change to table.enu
     table.string('tone').notNullable();
     table.string('urgency').notNullable();
+    table
+      .string('status')
+      .notNullable()
+      .defaultTo('Accepted');
     table.timestamp('createdAt').defaultTo(knex.fn.now());
   });
 };
