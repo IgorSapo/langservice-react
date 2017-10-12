@@ -31,13 +31,6 @@ export default class MenuExampleSecondary extends Component {
           as={NavLink}
           to="/newOrder"
         />
-        <Menu.Item
-          name="uploadFile"
-          active={activeItem === 'uploadFile'}
-          onClick={this.handleItemClick}
-          as={NavLink}
-          to="/uploadFile"
-        />
         <Menu.Menu position="right">
           <Menu.Item>
             <Input icon="search" placeholder="Search..." />

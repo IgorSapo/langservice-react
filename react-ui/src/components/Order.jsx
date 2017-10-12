@@ -1,21 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Card, Grid, Header, Table } from 'semantic-ui-react';
+import { loadOrderFiles } from '../actions/files';
 
-const files = [
-  {
-    fileName: 'SNIPPETS for Sublime text.txt',
-    fileSize: 1,
-    secureUrl:
-      'https://res.cloudinary.com/peacefulharbor/raw/upload/v1507751879/czatmdhrfc7wzji5rku8.txt'
-  },
-  {
-    fileName: 'SumatraPDF-settings.txt',
-    fileSize: 3,
-    secureUrl:
-      'https://res.cloudinary.com/peacefulharbor/raw/upload/v1507751884/rraii6ekbars5eglowr0.txt'
-  }
-];
+// const files = [
+//   {
+//     fileName: 'SNIPPETS for Sublime text.txt',
+//     fileSize: 1,
+//     secureUrl:
+//       'https://res.cloudinary.com/peacefulharbor/raw/upload/v1507751879/czatmdhrfc7wzji5rku8.txt'
+//   },
+//   {
+//     fileName: 'SumatraPDF-settings.txt',
+//     fileSize: 3,
+//     secureUrl:
+//       'https://res.cloudinary.com/peacefulharbor/raw/upload/v1507751884/rraii6ekbars5eglowr0.txt'
+//   }
+// ];
 
 const TableRow = ({ fileName, link, fileSize }) => (
   <Table.Row>
@@ -27,8 +28,12 @@ const TableRow = ({ fileName, link, fileSize }) => (
 );
 
 class Order extends React.Component {
+  componentDidMount() {
+    this.props.loadOrderFiles(this.props.order.id);
+  }
+
   render() {
-    const { id, urgency, tone, createdAt } = this.props.order;
+    const { id, urgency, tone, createdAt, files } = this.props.order;
     return (
       <Card fluid>
         <Card.Content>
@@ -56,14 +61,15 @@ class Order extends React.Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {files.map((file, index) => (
-                <TableRow
-                  key={index}
-                  fileName={file.fileName}
-                  fileSize={file.fileSize}
-                  link={file.secureUrl}
-                />
-              ))}
+              {files &&
+                files.map((file, index) => (
+                  <TableRow
+                    key={index}
+                    fileName={file.name}
+                    fileSize={file.size}
+                    link={file.url}
+                  />
+                ))}
             </Table.Body>
           </Table>
         </Card.Content>
@@ -91,4 +97,4 @@ const mapStateToProps = (state, ownProps) => {
 //   order: state.orders.orders[ownProps.match.params.orderId]
 // });
 
-export default connect(mapStateToProps)(Order);
+export default connect(mapStateToProps, { loadOrderFiles })(Order);

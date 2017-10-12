@@ -7,10 +7,12 @@ const PORT = process.env.PORT || 5000;
 
 //const orders = './routes/orders';
 import orders from './routes/orders';
+import files from './routes/files';
 
 app.use(bodyParser.json());
 
 app.use('/api/orders', orders);
+app.use('/api/files', files);
 
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../react-ui/build')));

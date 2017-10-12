@@ -1,16 +1,19 @@
 import {
   LOAD_ORDERS_START,
   LOAD_ORDERS_SUCCESS,
-  LOAD_ORDERS_FAIL
+  LOAD_ORDERS_FAIL,
+  LOAD_FILES_START,
+  LOAD_FILES_SUCCESS,
+  LOAD_FILES_FAIL
 } from '../types';
 
-// const initialState = {
-//   isLoading: false,
-//   orders: [],
-//   errors: null
-// };
+const initialState = {
+  isLoading: false,
+  orders: [],
+  errors: {}
+};
 
-const orders = (state = {}, action = {}) => {
+const orders = (state = initialState, action = {}) => {
   switch (action.type) {
     case LOAD_ORDERS_START:
       return {
@@ -24,6 +27,16 @@ const orders = (state = {}, action = {}) => {
     case LOAD_ORDERS_FAIL:
       return {
         isLoading: false
+      };
+    case LOAD_FILES_SUCCESS:
+      console.log('In reducer: files loaded!');
+      console.log(action.files);
+      const orderId = action.files[0].orderId;
+      return {
+        orders: state.orders.map(
+          order =>
+            order.id == orderId ? { ...order, files: action.files } : order
+        )
       };
     default:
       return state;

@@ -5,12 +5,12 @@ import './Table.css';
 import { connect } from 'react-redux';
 import { getOrderList } from '../actions/orders';
 
-const TableRow = ({ id, createdAt, urgency, tone }) => (
+const TableRow = ({ id, createdAt, urgency, tone, status }) => (
   <Table.Row as={NavLink} to={'/orders/' + id} className="table-row">
     <Table.Cell>{id}</Table.Cell>
     <Table.Cell>{createdAt}</Table.Cell>
     <Table.Cell>{urgency}</Table.Cell>
-    <Table.Cell />
+    <Table.Cell>{status}</Table.Cell>
     <Table.Cell>
       <Header as="h4" image>
         <Image
