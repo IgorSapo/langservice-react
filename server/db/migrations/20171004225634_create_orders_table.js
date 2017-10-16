@@ -17,9 +17,17 @@ exports.up = function(knex, Promise) {
       table.string('name').notNullable();
       table.string('size').notNullable();
       table.string('url').notNullable();
+    })
+    .createTable('users', function(table) {
+      table.increments('id');
+      table.string('username').notNullable();
+      table.string('password').notNullable();
     });
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('files').dropTable('orders');
+  return knex.schema
+    .dropTable('files')
+    .dropTable('orders')
+    .dropTable('users');
 };

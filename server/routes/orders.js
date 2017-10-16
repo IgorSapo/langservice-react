@@ -1,5 +1,6 @@
 import express from 'express';
 import knex from '../db/knex';
+import passport from 'passport';
 
 const router = express.Router();
 
@@ -12,6 +13,21 @@ router.get('/', function(req, res) {
     })
     .then(orders => res.json(orders));
 });
+
+// TODO remove this later - done for testing only
+router.post('/usertest', (req, res, next) =>
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      res.status(404).json({ error: 'Something went wrong' });
+      return;
+    }
+    if (info && info.message) {
+      res.status(401).json({ error: 'Invalid username or password' });
+      return;
+    }
+    res.json(user);
+  })(req, res, next)
+);
 
 router.post('/', function(req, res) {
   console.log('GET request recieved!');

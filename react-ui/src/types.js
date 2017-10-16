@@ -8,3 +8,7 @@ export const LOAD_ORDERS_FAIL = 'LOAD_ORDERS_FAIL';
 export const LOAD_FILES_START = 'LOAD_FILES_START';
 export const LOAD_FILES_SUCCESS = 'LOAD_FILES_SUCCESS';
 export const LOAD_FILES_FAIL = 'LOAD_FILES_FAIL';
+
+export const LOGIN_START = 'LOGIN_START';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'LOGIN_ERROR';

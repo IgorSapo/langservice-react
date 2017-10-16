@@ -20,9 +20,11 @@ export default class MenuExampleSecondary extends Component {
           to="/"
         />
         <Menu.Item
-          name="messages"
-          active={activeItem === 'messages'}
+          name="login"
+          active={activeItem === 'login'}
           onClick={this.handleItemClick}
+          as={NavLink}
+          to="/login"
         />
         <Menu.Item
           name="newOrder"

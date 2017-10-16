@@ -7,16 +7,22 @@
   },
   "scripts": {
     "start": "nodemon --watch server --exec babel-node -- server",
-    "heroku-postbuild":
-      "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
-  "cacheDirectories": ["node_modules", "react-ui/node_modules"],
+  "cacheDirectories": [
+    "node_modules",
+    "react-ui/node_modules"
+  ],
   "dependencies": {
     "body-parser": "^1.18.2",
     "bookshelf": "^0.10.4",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.1",
+    "express-session": "^1.15.6",
     "knex": "^0.13.0",
     "knex-db-manager": "^0.4.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "pg": "^7.3.0",
     "pg-escape": "^0.2.0"
   },
@@ -24,7 +30,12 @@
     "type": "git",
     "url": "https://github.com/mars/heroku-cra-node.git"
   },
-  "keywords": ["node", "heroku", "create-react-app", "react"],
+  "keywords": [
+    "node",
+    "heroku",
+    "create-react-app",
+    "react"
+  ],
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
